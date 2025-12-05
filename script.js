@@ -163,6 +163,7 @@ reportForm.addEventListener('submit', async (e) => {
     // Send to backend
     const res = await fetch(SUBMIT_ENDPOINT, { method: 'POST', body: fd });
 
+
     const text = await res.text();
     console.log('Raw server response:', text);
 
