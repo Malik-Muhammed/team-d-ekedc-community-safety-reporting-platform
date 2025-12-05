@@ -7,8 +7,10 @@
 // - Map does not collapse on submit
 
 // Replace with your live backend URLs once deployed
-const API_ENDPOINT = 'https://team-d‑ekedc‑cir‑backend.onrender.com/api/submit';
-const STATUS_ENDPOINT = 'https://team-d‑ekedc‑cir‑backend.onrender.com/api/report';
+const BASE_URL = "https://team-d-ekedc-cir-backend.onrender.com";
+const SUBMIT_ENDPOINT = `${BASE_URL}/api/submit`;
+const STATUS_ENDPOINT = `${BASE_URL}/api/report`;
+
 
 
 const useLocationBtn = document.getElementById('useLocation');
