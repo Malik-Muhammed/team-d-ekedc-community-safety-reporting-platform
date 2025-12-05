@@ -161,7 +161,8 @@ reportForm.addEventListener('submit', async (e) => {
     if (addressVal) fd.append('address', addressVal);
 
     // Send to backend
-    const res = await fetch(API_ENDPOINT, { method: 'POST', body: fd });
+    const res = await fetch(SUBMIT_ENDPOINT, { method: 'POST', body: fd });
+
     const text = await res.text();
     console.log('Raw server response:', text);
 
