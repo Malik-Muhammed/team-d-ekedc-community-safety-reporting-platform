@@ -5,61 +5,58 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EKEDC Community Safety Reporting</title>
   <link rel="stylesheet" href="styles.css" />
-   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
 <body>
   <div class="container">
     <header class="hero">
-      <h1>EKEDC Community Safety Reporting</h1>
-      <p>Report hazards, vandalism or suspected meter tampering. You may stay anonymous.</p>
+      <h1>EKEDC Community Incidents Reporting</h1>
+      <p>Report hazards, vandalism, or suspected meter tampering. You may stay anonymous.</p>
     </header>
 
     <main>
       <section class="form-card">
-        <form id="reportForm" enctype="multipart/form-data">
+        <h2>Submit a Report</h2>
+        <form id="reportForm" enctype="multipart/form-data" autocomplete="off">
           <label for="category">Category</label>
-          <select id="category" name="category">
+          <select id="category" name="category" required>
             <option value="hazard">Safety hazard</option>
             <option value="theft">Suspected energy theft</option>
             <option value="vandalism">Vandalism</option>
             <option value="transformer">Transformer issue</option>
             <option value="other">Other</option>
           </select>
-          
-            <label for="district">Select your District or Business Unit</label>
-            <select id="district" name="district" required>
-                <option value="">Choose</option>
-                <option value="Ajah">Ajah</option>
-                <option value="Ajele">Ajele</option>
-                <option value="Agbara">Agbara</option>
-                <option value="Apapa">Apapa</option>
-                <option value="Festac">Festac</option>
-                <option value="Ibeju">Ibeju</option>
-                <option value="Islands">Islands</option>
-                <option value="Ijora">Ijora</option>
-                <option value="Mushin">Mushin</option>
-                <option value="Ojo">Ojo</option>
-                <option value="Orile">Orile</option>
-                <option value="Lekki">Lekki</option>
-            </select>
 
-          
+          <label for="district">District / Business Unit</label>
+          <select id="district" name="district" required>
+            <option value="">Choose</option>
+            <option value="Ajah">Ajah</option>
+            <option value="Ajele">Ajele</option>
+            <option value="Agbara">Agbara</option>
+            <option value="Apapa">Apapa</option>
+            <option value="Festac">Festac</option>
+            <option value="Ibeju">Ibeju</option>
+            <option value="Islands">Islands</option>
+            <option value="Ijora">Ijora</option>
+            <option value="Mushin">Mushin</option>
+            <option value="Ojo">Ojo</option>
+            <option value="Orile">Orile</option>
+            <option value="Lekki">Lekki</option>
+          </select>
 
           <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" placeholder="Please describe the issue in detail"></textarea>
+          <textarea id="description" name="description" rows="4" placeholder="Describe the issue"></textarea>
 
           <label for="media">Photo or short video (optional)</label>
           <input id="media" name="media" type="file" accept="image/*,video/*" capture>
-
 
           <div class="location-row">
             <button type="button" id="useLocation" class="btn">Use my location</button>
             <div class="or">or enter address</div>
             <input id="address" name="address" type="text" placeholder="Nearest landmark or address" />
-            
           </div>
 
-          <div id="mapContainer" class="map-preview hidden">
+          <div id="mapContainer" class="map-preview hidden" aria-hidden="true">
             <div id="map" style="height:220px"></div>
             <div class="coords" id="coords"></div>
           </div>
@@ -70,7 +67,7 @@
           </label>
 
           <div id="contactWrapper" class="hidden">
-            <label for="contact">Contact optional</label>
+            <label for="contact">Contact (optional)</label>
             <input id="contact" name="contact" type="text" placeholder="Phone or email" />
           </div>
 
@@ -83,12 +80,22 @@
           <h3>Thank you</h3>
           <p>Your report reference is</p>
           <pre id="ref" class="ref"></pre>
-          <p>Save this reference to follow up with EKEDC.</p>
+          <p>Save this reference to track your report</p>
+          <button id="closeResult" class="closeResultBtn">Close</button>
+        </div>
+
+        <hr>
+
+        <h2>Check Report Status</h2>
+        <div class="lookup">
+          <input id="ticketId" type="text" placeholder="Enter your ticket ID" />
+          <button id="checkStatusBtn" class="btn">Check Status</button>
+          <p id="statusResult" class="status-result"></p>
         </div>
       </section>
 
       <aside class="info-card">
-        <h3>When to report</h3>
+        <h3>When to Report</h3>
         <ul>
           <li>Broken or leaning pole</li>
           <li>Sparking or exposed conductors</li>
