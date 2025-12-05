@@ -12,7 +12,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, origins=["https://malik-muhammed.github.io"])
+
 
 # Upload configuration
 UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'uploads')
