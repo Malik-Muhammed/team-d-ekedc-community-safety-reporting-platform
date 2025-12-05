@@ -2,22 +2,28 @@ import os
 import sqlite3
 import string
 import random
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 from datetime import datetime
+from werkzeug.utils import secure_filename
+
+# Load environment variables if available
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 
-# Create uploads folder if missing
-UPLOAD_FOLDER = 'uploads'
-if not os.path.exists(UPLOAD_FOLDER):
-    os.makedirs(UPLOAD_FOLDER)
+# Upload configuration
+UPLOAD_FOLDER = os.getenv('UPLOAD_FOLDER', 'uploads')
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 
-DB_NAME = 'reports.db'
+# Database configuration
+DB_NAME = os.getenv('DB_NAME', 'reports.db')
 
-# Create database if it does not exist
 def init_db():
+    """Initializes the database if not exists."""
     conn = sqlite3.connect(DB_NAME)
     cur = conn.cursor()
     cur.execute("""
@@ -41,51 +47,50 @@ def init_db():
 
 init_db()
 
-
-# Generate ticket: 4 digits, 3 random letters, 4 digits (total: 11 chars)
 def generate_ticket():
-    part1 = ''.join(random.choice(string.digits) for _ in range(4))
-    part2 = ''.join(random.choice(string.ascii_uppercase) for _ in range(3))
-    part3 = ''.join(random.choice(string.digits) for _ in range(4))
+    """Generates a unique ticket ID: 4 digits + 3 letters + 4 digits."""
+    part1 = ''.join(random.choices(string.digits, k=4))
+    part2 = ''.join(random.choices(string.ascii_uppercase, k=3))
+    part3 = ''.join(random.choices(string.digits, k=4))
     return part1 + part2 + part3
 
+def allowed_file(filename):
+    """Check if the uploaded file is allowed."""
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/api/submit', methods=['POST'])
 def submit_report():
     try:
-        print("Incoming request:", request.form)
-        print("Received form data:", dict(request.form))
-        print("Received files:", request.files)
+        form = request.form
+        category = form.get('category')
+        description = form.get('description')
+        anonymous = form.get('anonymous') == 'true'
+        contact = form.get('contact')
+        address = form.get('address')
+        district = form.get('district')
+        latitude = form.get('latitude')
+        longitude = form.get('longitude')
 
-        category = request.form.get('category')
-        description = request.form.get('description')
-        anonymous = request.form.get('anonymous') == 'true'
-        contact = request.form.get('contact')
-        address = request.form.get('address')
-        district = request.form.get('district')
-        latitude = request.form.get('latitude')
-        longitude = request.form.get('longitude')
-
-        # File upload
+        # Handle media upload
         media_path = None
         if 'media' in request.files:
             media = request.files['media']
-            if media.filename:
-                filename = generate_ticket() + "_" + media.filename.replace(" ", "_")
+            if media and allowed_file(media.filename):
+                filename = secure_filename(generate_ticket() + "_" + media.filename)
                 media_path = os.path.join(UPLOAD_FOLDER, filename)
                 media.save(media_path)
 
         ticket_id = generate_ticket()
 
+        # Insert into database
         conn = sqlite3.connect(DB_NAME)
         cur = conn.cursor()
         cur.execute("""
-            INSERT INTO reports (
-                id, category, description, anonymous, contact,
-                address, district, latitude, longitude, media_path,
-                status, created_at
-            )
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        INSERT INTO reports (
+            id, category, description, anonymous, contact,
+            address, district, latitude, longitude, media_path,
+            status, created_at
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
         """, (
             ticket_id, category, description, int(anonymous), contact,
             address, district, latitude, longitude, media_path,
@@ -100,7 +105,6 @@ def submit_report():
         print("Error:", e)
         return jsonify({"error": "Server error"}), 500
 
-
 @app.route('/api/report/<ticket_id>/status', methods=['GET'])
 def check_status(ticket_id):
     try:
@@ -114,11 +118,15 @@ def check_status(ticket_id):
             return jsonify({"status": row[0]})
         else:
             return jsonify({"error": "Not found"}), 404
-
     except Exception as e:
         print("Error:", e)
         return jsonify({"error": "Server error"}), 500
 
+@app.route('/uploads/<filename>', methods=['GET'])
+def uploaded_file(filename):
+    """Serve uploaded files (for testing purposes only)"""
+    return send_from_directory(UPLOAD_FOLDER, filename)
 
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
