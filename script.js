@@ -206,7 +206,7 @@ closeResultBtn.addEventListener('click', () => {
 
   mapContainer.classList.add('hidden');
   mapContainer.setAttribute('aria-hidden', 'true');
-
+  coordsEl.textContent = '';     // clear lat and long text
   refEl.textContent = '';
   contactWrapper.classList.toggle('hidden', anonymousCheckbox.checked);
 });
