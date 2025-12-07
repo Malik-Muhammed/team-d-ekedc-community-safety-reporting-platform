@@ -4,113 +4,130 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>EKEDC Community Safety Reporting</title>
+
   <link rel="stylesheet" href="styles.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <link rel="icon" type="image/png" href="./images/logo-1.png" />
 </head>
+
 <body>
-  <div class="container">
-    <header class="hero">
-      <h1>EKEDC Community Incidents Reporting</h1>
-      <p>Report hazards, vandalism, or suspected meter tampering. You may stay anonymous.</p>
-    </header>
+  <header class="site-header">
+    <div class="header-left">
+      <img src="./images/logo-1.png" alt="EKEDC Logo" class="brand-logo">
+    </div>
 
-    <main>
-      <section class="form-card">
-        <h2>Submit a Report</h2>
-        <form id="reportForm" enctype="multipart/form-data" autocomplete="off">
-          <label for="category">Category</label>
-          <select id="category" name="category" required>
-            <option value="hazard">Safety hazard</option>
-            <option value="theft">Suspected energy theft</option>
-            <option value="vandalism">Vandalism</option>
-            <option value="transformer">Transformer issue</option>
-            <option value="other">Other</option>
-          </select>
+    <div class="header-right">
+      <h1 class="title">Community Incidents Reporting</h1>
+      <p class="subtitle">Help us improve safety across your community. You may remain anonymous.</p>
+    </div>
+  </header>
 
-          <label for="district">District / Business Unit</label>
-          <select id="district" name="district" required>
-            <option value="">Choose</option>
-            <option value="Ajah">Ajah</option>
-            <option value="Ajele">Ajele</option>
-            <option value="Agbara">Agbara</option>
-            <option value="Apapa">Apapa</option>
-            <option value="Festac">Festac</option>
-            <option value="Ibeju">Ibeju</option>
-            <option value="Islands">Islands</option>
-            <option value="Ijora">Ijora</option>
-            <option value="Mushin">Mushin</option>
-            <option value="Ojo">Ojo</option>
-            <option value="Orile">Orile</option>
-            <option value="Lekki">Lekki</option>
-          </select>
+  <main class="page-content">
 
-          <label for="description">Description</label>
-          <textarea id="description" name="description" rows="4" placeholder="Describe the issue"></textarea>
+    <section class="form-card">
 
-          <label for="media">Photo or short video (optional)</label>
-          <input id="media" name="media" type="file" accept="image/*,video/*" capture>
+      <h2 class="section-title">Submit a Report</h2>
 
-          <div class="location-row">
-            <button type="button" id="useLocation" class="btn">Use my location</button>
-            <div class="or">or enter address</div>
-            <input id="address" name="address" type="text" placeholder="Nearest landmark or address" />
-          </div>
+      <form id="reportForm" enctype="multipart/form-data" autocomplete="off">
 
-          <div id="mapContainer" class="map-preview hidden" aria-hidden="true">
-            <div id="map" style="height:220px"></div>
-            <div class="coords" id="coords"></div>
-          </div>
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+          <option value="hazard">Safety hazard</option>
+          <option value="theft">Suspected energy theft</option>
+          <option value="vandalism">Vandalism</option>
+          <option value="transformer">Transformer issue</option>
+          <option value="other">Other</option>
+        </select>
 
-          <label class="checkbox">
-            <input id="anonymous" name="anonymous" type="checkbox" checked />
-            Submit anonymously
-          </label>
+        <label for="district">District or Business Unit</label>
+        <select id="district" name="district" required>
+          <option value="">Choose</option>
+          <option value="Ajah">Ajah</option>
+          <option value="Ajele">Ajele</option>
+          <option value="Agbara">Agbara</option>
+          <option value="Apapa">Apapa</option>
+          <option value="Festac">Festac</option>
+          <option value="Ibeju">Ibeju</option>
+          <option value="Islands">Islands</option>
+          <option value="Ijora">Ijora</option>
+          <option value="Mushin">Mushin</option>
+          <option value="Ojo">Ojo</option>
+          <option value="Orile">Orile</option>
+          <option value="Lekki">Lekki</option>
+        </select>
 
-          <div id="contactWrapper" class="hidden">
-            <label for="contact">Contact (optional)</label>
-            <input id="contact" name="contact" type="text" placeholder="Phone or email" />
-          </div>
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Describe the issue"></textarea>
 
-          <div class="actions">
-            <button id="submitBtn" class="submit" type="submit">Submit Report</button>
-          </div>
-        </form>
+        <label for="media">Photo or short video (optional)</label>
+        <input id="media" name="media" type="file" accept="image/*,video/*" capture>
 
-        <div id="result" class="result hidden">
-          <h3>Thank you</h3>
-          <p>Your report reference is</p>
-          <pre id="ref" class="ref"></pre>
-          <p>Save this reference to track your report</p>
-          <button id="closeResult" class="closeResultBtn">Close</button>
+        <div class="location-row">
+          <button type="button" id="useLocation" class="btn">Use my location</button>
+          <div class="or">or</div>
+          <input id="address" name="address" type="text" placeholder="Nearest landmark or address">
         </div>
 
-        <hr>
-
-        <h2>Check Report Status</h2>
-        <div class="lookup">
-          <input id="ticketId" type="text" placeholder="Enter your ticket ID" />
-          <button id="checkStatusBtn" class="btn">Check Status</button>
-          <p id="statusResult" class="status-result"></p>
+        <div id="mapContainer" class="map-preview hidden" aria-hidden="true">
+          <div id="map" style="height:220px"></div>
+          <div class="coords" id="coords"></div>
         </div>
-      </section>
 
-      <aside class="info-card">
-        <h3>When to Report</h3>
-        <ul>
-          <li>Broken or leaning pole</li>
-          <li>Sparking or exposed conductors</li>
-          <li>Flooding near transformers</li>
-          <li>Suspected meter tampering or bypass</li>
-          <li>Illegal connections and vandalism</li>
-        </ul>
-        <p>Reports with photos are resolved faster. You may remain anonymous.</p>
-      </aside>
-    </main>
+        <label class="checkbox">
+          <input id="anonymous" name="anonymous" type="checkbox" checked>
+          Submit anonymously
+        </label>
 
-    <footer class="footer">EKEDC Community Safety Reporting Prototype</footer>
-  </div>
+        <div id="contactWrapper" class="hidden">
+          <label for="contact">Contact (optional)</label>
+          <input id="contact" name="contact" type="text" placeholder="Phone or email">
+        </div>
+
+        <div class="actions">
+          <button id="submitBtn" class="submit" type="submit">Submit Report</button>
+        </div>
+      </form>
+
+      <div id="result" class="result hidden">
+        <h3>Thank you</h3>
+        <p>Your report reference is</p>
+        <pre id="ref" class="ref"></pre>
+        <p>Keep this reference to track your report</p>
+        <button id="closeResult" class="closeResultBtn">Close</button>
+      </div>
+
+      <hr class="divider">
+
+      <h2 class="section-title">Check Report Status</h2>
+      <div class="lookup">
+        <input id="ticketId" type="text" placeholder="Enter your ticket ID">
+        <button id="checkStatusBtn" class="btn">Check Status</button>
+        <p id="statusResult" class="status-result"></p>
+      </div>
+
+    </section>
+
+    <aside class="info-card">
+      <h3>When to Report</h3>
+      <ul>
+        <li>Broken or leaning pole</li>
+        <li>Sparking or exposed conductors</li>
+        <li>Flooding near transformers</li>
+        <li>Suspected meter tampering or bypass</li>
+        <li>Illegal connections and vandalism</li>
+      </ul>
+      <p>Reports with photos are resolved faster. You may stay anonymous.</p>
+    </aside>
+
+  </main>
+
+  <footer class="footer">
+    EKEDC Community Safety Reporting
+  </footer>
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="script.js"></script>
+
 </body>
 </html>
