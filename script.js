@@ -7,6 +7,9 @@
 // - Map does not collapse on submit
 
 // Replace with your live backend URLs once deployed
+
+
+
 const BASE_URL = "https://team-d-ekedc-cir-backend.onrender.com";
 const SUBMIT_ENDPOINT = `${BASE_URL}/api/submit`;
 const STATUS_ENDPOINT = `${BASE_URL}/api/report`;
@@ -236,4 +239,20 @@ checkStatusBtn.addEventListener('click', async () => {
     statusResult.textContent = 'Error fetching status';
     statusResult.style.color = 'red';
   }
+});
+
+
+// Hamburger menu toggle
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
+hamburger.addEventListener('click', () => {
+  navLinks.classList.toggle('active');
+  hamburger.classList.toggle('active');
+});
+
+document.querySelectorAll('.nav-link').forEach(link => {
+  link.addEventListener('click', () => {
+    navLinks.classList.remove('active');
+    hamburger.classList.remove('active');
+  });
 });
