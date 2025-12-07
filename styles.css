@@ -18,6 +18,17 @@ body a {
   color: inherit;
 }
 
+.three-btn, .or {
+  margin-top: 12px;
+}
+
+.location-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  
+}
+
 /* Navigation bar */
 .navbar {
   position: fixed;
@@ -172,6 +183,8 @@ textarea { resize: vertical; }
   opacity: 0.9;
 }
 
+.hidden{ display: none;
+}
 /* Result box */
 .result {
   background: var(--white);
@@ -179,6 +192,15 @@ textarea { resize: vertical; }
   padding: 16px;
   border-radius: 8px;
   margin-top: 15px;
+}
+
+
+
+
+
+
+.contact-wrapper {
+  margin-top: 2px
 }
 
 .result.hidden { display: none; }

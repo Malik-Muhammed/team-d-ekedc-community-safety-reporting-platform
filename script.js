@@ -18,6 +18,7 @@ const STATUS_ENDPOINT = `${BASE_URL}/api/report`;
 
 const useLocationBtn = document.getElementById('useLocation');
 const mapContainer = document.getElementById('mapContainer');
+const mapPreview = document.getElementsByClassName('map-preview');
 const coordsEl = document.getElementById('coords');
 const reportForm = document.getElementById('reportForm');
 const mediaInput = document.getElementById('media');
@@ -39,12 +40,20 @@ resultBox.classList.add('hidden');
 
 // Toggle contact wrapper based on anonymous checkbox
 anonymousCheckbox.addEventListener('change', () => {
-  contactWrapper.classList.toggle('hidden', anonymousCheckbox.checked);
+  console.log('Anonymous checkbox changed:', anonymousCheckbox.checked);  
+  // contactWrapper.classList.toggle('hidden', anonymousCheckbox.checked);
+  if (anonymousCheckbox.checked) {
+    contactWrapper.classList.add('hidden');
+  } else {  
+    contactWrapper.classList.remove('hidden');
+  }
 });
 
 // Request geolocation and show map preview
 useLocationBtn.addEventListener('click', (e) => {
   e.preventDefault();
+  mapContainer.classList.remove('hidden');
+
   if (!navigator.geolocation) {
     alert('Geolocation not supported by your browser.');
     return;
@@ -72,7 +81,7 @@ useLocationBtn.addEventListener('click', (e) => {
 });
 
 function showMapPreview(c) {
-  mapContainer.classList.remove('hidden');
+  // mapContainer.classList.remove('hidden');
   mapContainer.setAttribute('aria-hidden', 'false');
 
   if (!map) {
@@ -199,7 +208,7 @@ reportForm.addEventListener('submit', async (e) => {
 closeResultBtn.addEventListener('click', () => {
   resultBox.classList.add('hidden');
   reportForm.reset();
-
+mapContainer.classList.add('hidden');
   coords = null;
   if (marker && map) map.removeLayer(marker);
   marker = null;
