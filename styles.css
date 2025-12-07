@@ -40,6 +40,7 @@ body a {
   justify-content: space-between;
   align-items: center;
   padding: 14px 40px;
+  z-index: 100;
 
 }
 .logo-div {
@@ -85,6 +86,12 @@ body a {
   font-weight: 700;
   /* background: rgba(255,255,255,0.25) */
 }
+
+
+#mapContainer {
+ z-index: 1;
+}
+
 
 .hamburger {
   display: none;
