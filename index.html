@@ -79,8 +79,26 @@
           <label for="description">Description</label>
           <textarea id="description" name="description" rows="4" placeholder="Describe the issue"></textarea>
 
-          <label for="media">Photo or short video</label>
-          <input id="media" name="media" type="file" accept="image/*,video/*" capture>
+          <!-- <label for="media">Photo or short video</label>
+          <input id="media" name="media" type="file" accept="image/*,video/*" capture> -->
+
+          <label for="media" class="file-label">
+              <span class="file-icon">📷</span>
+              <span class="file-text">
+                <strong>Add photo or video</strong>
+                <small>Optional • JPG, PNG, MP4</small>
+              </span>
+          </label>
+
+          <input
+            id="media"
+            name="media"
+            type="file"
+            accept="image/*,video/*"
+            capture
+            hidden
+          >
+
 
           <div class="location-row">
             <div class="location-option">
@@ -114,8 +132,8 @@
 
         <div id="result" class="result hidden">
           <h3>Thank you</h3>
-          <p>Your report reference is</p>
-          <pre id="ref" class="ref"></pre>
+          <p>Your report reference is <pre id="ref" class="ref"></pre> </p>
+          <!-- <pre id="ref" class="ref"></pre> -->
           <p>Save this reference to track your report</p>
           <button id="closeResult" class="closeResultBtn">Close</button>
         </div>
