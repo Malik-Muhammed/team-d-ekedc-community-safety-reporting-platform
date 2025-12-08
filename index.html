@@ -14,10 +14,11 @@
   <nav class="navbar">
     <div class="nav-left">
       <div class="logo-div">
-      <a href="#" >
-          <img src="./images/logo-1.png" class="logo" alt="EKEDC logo"></a>
+        <a href="#" >
+            <img src="./images/logo-1.png" class="logo" alt="EKEDC logo">
+        </a>
           
-        </div>
+      </div>
     </div>
 
     <div class="nav-right">
@@ -50,6 +51,7 @@
 
           <label for="category">Category</label>
           <select id="category" name="category" required>
+            <option value="" disabled selected>Select category</option>
             <option value="hazard">Safety hazard</option>
             <option value="theft">Suspected energy theft</option>
             <option value="vandalism">Vandalism</option>
@@ -59,7 +61,7 @@
 
           <label for="district">District or Business unit</label>
           <select id="district" name="district" required>
-            <option value="">Choose</option>
+            <option value="" disabled selected>Choose</option>
             <option value="Ajah">Ajah</option>
             <option value="Ajele">Ajele</option>
             <option value="Agbara">Agbara</option>

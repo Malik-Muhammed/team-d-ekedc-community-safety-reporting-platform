@@ -72,18 +72,19 @@ body a {
     transition: 0.7s ease-in;
   }
 
-.nav-link > a{
+.nav-link{
   color: var(--white);
-  font-weight: 500;
+  /* color: red; */
+  font-weight: 300;
   padding: 6px 12px;
   border-radius: 4px;
-  font-size: 18px;
+  font-size: 16px;
   transition: background 0.2s;
 }
 
-.nav-link a:hover {
-  /* background: rgba(255,255,255,0.15); */
-  font-weight: 700;
+.nav-link:hover {
+  background: rgba(255,255,255,0.15);
+  font-weight: 500;
   /* background: rgba(255,255,255,0.25) */
 }
 
@@ -91,6 +92,18 @@ body a {
 #mapContainer {
  z-index: 1;
  position: relative;
+ top: 16px;
+ 
+}
+
+#map {
+  border-radius: 8px;
+
+}
+
+.coords {
+  margin-top:8px;
+  margin-bottom: 30px;
 }
 
 
@@ -172,7 +185,7 @@ textarea:focus,
 select:focus {
   outline: none;
   border-color: var(--rhino);
-  box-shadow: 0 0 0 2px rgba(49,47,96,0.2);
+  /* box-shadow: 0 0 0 2px rgba(49,47,96,0.2); */
 }
 
 textarea { resize: vertical; }
@@ -281,4 +294,83 @@ textarea { resize: vertical; }
     transform: translateY(-8px) rotate(-45deg);
   }
  
+}
+
+
+/* Base select styling */
+select {
+  width: 100%;
+  padding: 12px 42px 12px 14px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: 1px solid #e0e4ea;
+  background-color: #ffffff;
+  color: var(--text);
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  line-height: 1.4;
+}
+
+/* Custom dropdown arrow */
+select {
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--shuttle) 50%),
+    linear-gradient(135deg, var(--shuttle) 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 20px) calc(50% - 4px),
+    calc(100% - 14px) calc(50% - 4px),
+    100% 0;
+  background-size:
+    6px 6px,
+    6px 6px,
+    2.5em 2.5em;
+  background-repeat: no-repeat;
+}
+
+select:active {
+  transform: scale(0.985);
+}
+
+
+/* Hover */
+select:hover {
+  border-color: var(--rhino);
+}
+
+/* Focus */
+select:focus {
+  outline: none;
+  border-color: var(--rhino);
+  box-shadow: 0 0 0 3px rgba(49, 47, 96, 0.2);
+  background-color: #ffffff;
+}
+
+@media (hover: hover) {
+  select:hover {
+    border-color: var(--rhino);
+  }
+}
+
+select option {
+  font-size: 15px;
+  padding: 10px;
+}
+
+
+/* Disabled */
+select:disabled {
+  background-color: #f1f3f6;
+  color: #9aa0a6;
+  cursor: not-allowed;
+}
+
+/* Option styling */
+select option {
+  font-size: 15px;
+  padding: 10px;
 }
