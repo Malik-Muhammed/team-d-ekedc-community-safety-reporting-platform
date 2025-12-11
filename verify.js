@@ -167,13 +167,14 @@
     phone: "+234 815 551 1879",
     location: "Marina HQ"
   },
-  "3005": {
-    id: "3005",
+  "23129": {
+    id: "23129",
     name: "Akinjole David",
     department: "Contract Management",
     email: "david.akinjole@ekedp.com",
-    phone: "+234 813 285 8042",
-    location: "Marina HQ"
+    phone: "+234 907 955 9397",
+    location: "Marina HQ",
+    photo: "./images/staff/23129.jpeg" // Optional - add when available
   },
   "30021": {
     id: "30021",
