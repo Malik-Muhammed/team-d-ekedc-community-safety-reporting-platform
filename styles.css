@@ -75,7 +75,7 @@ body a {
 .nav-link{
   color: var(--white);
   /* color: red; */
-  font-weight: 300;
+  font-weight: 400;
   padding: 6px 12px;
   border-radius: 4px;
   font-size: 16px;
@@ -374,8 +374,7 @@ select option {
   font-size: 15px;
   padding: 10px;
 }
-
-
+/* File upload label */
 
 .file-label {
   display: flex;

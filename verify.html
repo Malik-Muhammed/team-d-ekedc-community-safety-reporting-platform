@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EKEDC Staff Directory</title>
+  <meta name="description" content="Search for EKEDC staff information using their unique employee ID">
+  <link rel="stylesheet" href="verify.css">
+  
+  
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="nav-left">
+        <div class="logo-div">
+            <a href="#" >
+                <img src="./images/logo-1.png" class="logo" alt="EKEDC logo">
+            </a>
+            
+        </div>
+        </div>
+
+        <div class="nav-right">
+            <ul nav class="nav-links">
+                <li><a href="index.html" class="nav-link">Make a report</a></li>
+                <li><a href="verify.html" class="nav-link">Verify a staff</a></li>
+            </ul>
+            
+
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+<main class="container">
+    <section class="wrapper">
+        <!-- Icon -->
+        <div class="icon-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+        </div>
+
+        <!-- Title -->
+        <h1>EKEDC Staff Directory</h1>
+        <p class="subtitle">Search for staff information using their unique employee ID</p>
+
+        <!-- Search Box -->
+        <div class="search-container">
+        <div class="input-wrapper">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <path d="m21 21-4.3-4.3"></path>
+            </svg>
+            <input 
+            type="text" 
+            id="searchInput" 
+            class="search-input" 
+            placeholder="Enter Staff ID (e.g., 23567)"
+            maxlength="5"
+            >
+        </div>
+        <button id="searchBtn" class="search-btn">Search</button>
+        </div>
+
+        <p class="helper-text">Enter a 5-digit staff ID number to look up employee information</p>
+        <p id="errorText" class="error-text hidden"></p>
+
+        <p id="hintText" class="hint">
+        Try searching with ID: <button class="hint-link" id="tryExample">23567</button>
+        </p>
+
+        <!-- Result Card -->
+        <div id="resultCard" class="result-card hidden">
+        <div class="result-header">
+        <div class="avatar">
+            <img id="avatarPhoto" class="avatar-photo hidden" src="" alt="Staff photo">
+            <span id="avatarInitials" class="avatar-initials"></span>
+        </div>
+
+            <div class="result-title">
+            <h2 id="staffName"></h2>
+            <!-- <p id="staffPosition" class="position"></p> -->
+            </div>
+        </div>
+        <div class="info-list">
+            <div class="info-row">
+            <span class="info-label">Staff ID</span>
+            <span id="staffId" class="info-value"></span>
+            </div>
+            <div class="info-row">
+            <span class="info-label">Department</span>
+            <span id="staffDepartment" class="info-value"></span>
+            </div>
+            <div class="info-row">
+            <span class="info-label">Email</span>
+            <span id="staffEmail" class="info-value"></span>
+            </div>
+            <div class="info-row">
+            <span class="info-label">Phone</span>
+            <span id="staffPhone" class="info-value"></span>
+            </div>
+            <div class="info-row">
+            <span class="info-label">Location</span>
+            <span id="staffLocation" class="info-value"></span>
+            </div>
+        </div>
+        </div>
+    </section>
+   
+</main>
+
+<!-- Photo Modal -->
+<div id="photoModal" class="photo-modal hidden">
+  <div class="modal-overlay"></div>
+  <div class="modal-content">
+    <button class="modal-close">&times;</button>
+    <img id="modalPhoto" src="" alt="Staff photo">
+  </div>
+</div>
+
+
+<script src="verify.js"></script>
+
+ 
+</body>
+</html>
