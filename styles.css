@@ -251,6 +251,12 @@ textarea { resize: vertical; }
   font-size: 14px;
 }
 
+.footer>p {
+  color: var(--rhino);
+  font-weight: 700;
+}
+
+
 /* Mobile */
 @media (max-width: 900px) {
   main {
